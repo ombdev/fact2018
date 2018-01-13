@@ -3,7 +3,7 @@ def suma(x):
     return x + 1
 
 def test_suma():
-    assert suma(5) == 7
+    assert suma(6) == 7
 
 def truncate(f, n, strmode=False):
     """
