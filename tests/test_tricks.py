@@ -1,4 +1,4 @@
-from ..cfdiengine.misc.tricks import truncate
+from cfdiengine.misc.tricks import truncate
 
 def test_truncate():
     """
