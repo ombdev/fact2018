@@ -1,3 +1,5 @@
+from cfdiengine.misc.helperstr import HelperStr
+
 def test_format_currency():
     """
     to be more specific
