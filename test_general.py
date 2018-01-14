@@ -1,8 +1,15 @@
 """
 Testing module
 """
-from cfdiengine.misc.helperstr import HelperStr
-from cfdiengine.misc.tricks import truncate
+
+sys.path.append(
+    os.path.abspath(
+        os.path.join(os.path.dirname(__file__), "cfdiengine")
+    )
+)
+
+from misc.helperstr import HelperStr
+from misc.tricks import truncate
 '''
 import sys
 print(sys.path)
