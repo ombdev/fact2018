@@ -34,3 +34,12 @@ class HelperStr(object):
                  )
         else:
             raise Exception("input parameter is not an amount string")
+
+    @staticmethod
+    def random_str(size=8):
+        """generates random string as per size"""
+        return ''.join(
+            random.SystemRandom().choice(
+                string.ascii_uppercase + string.digits
+            ) for _ in range(size)
+        )
