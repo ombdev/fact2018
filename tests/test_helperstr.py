@@ -1,4 +1,4 @@
-from cfdiengine.misc.helperstr import HelperStr
+from ..cfdiengine.misc.helperstr import HelperStr
 
 def test_format_currency():
     """
