@@ -1,3 +1,11 @@
+import sys
+import os
+
+sys.path.append(os.path.abspath('.'))
+
+for p in sys.path:
+    print(p)
+
 from cfdiengine.misc.tricks import truncate
 
 def test_truncate():
