@@ -1,6 +1,3 @@
-#import sys
-#sys.path.append('.')
-
 from cfdiengine.misc.tricks import truncate
 
 def test_truncate():
