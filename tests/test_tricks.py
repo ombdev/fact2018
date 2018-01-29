@@ -1,10 +1,5 @@
-import sys
-import os
-
-sys.path.append(os.path.abspath('.'))
-
-for p in sys.path:
-    print(p)
+#import sys
+#sys.path.append('.')
 
 from cfdiengine.misc.tricks import truncate
 
