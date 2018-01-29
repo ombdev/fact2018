@@ -4,7 +4,7 @@ python:
 before_install:
   - sudo apt-get install -y xsltproc
   - export PYTHONPATH=.
-  - echo $PYTHONPATH
+  - pwd
 # command to install dependencies
 install:
   - pip install -r requirements.txt
