@@ -1,7 +1,3 @@
-import sys
-
-sys.path.append('.')
-
 from cfdiengine.misc.helperstr import HelperStr
 
 def test_format_currency():
