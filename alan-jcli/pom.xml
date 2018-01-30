@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.dorian</groupId>
-  <artifactId>alanjcli</artifactId>
+  <artifactId>alan-jcli</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>alanjcli</name>
+  <name>alan-jcli</name>
   <url>http://maven.apache.org</url>
 
   <properties>
