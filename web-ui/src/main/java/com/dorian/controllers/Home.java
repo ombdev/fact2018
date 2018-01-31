@@ -20,9 +20,11 @@ public class Home extends Master {
     public ModelAndView startUp(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
 
-        HashMap<String, String> tableCaptions = new HashMap<String, String>();
+        String username = this.getUserNameFromContext();
+
         UserSessionData user = null;
-        return this.drawClassic(request, response, user, tableCaptions,
-                "Inicio", "home");
+
+        return this.drawClassic(request, response, user,
+                new HashMap<String, String>(), "Inicio", "home");
     }
 }
