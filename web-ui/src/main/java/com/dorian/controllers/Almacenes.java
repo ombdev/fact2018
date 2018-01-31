@@ -6,6 +6,7 @@ package com.dorian.controllers;
 
 import com.dorian.session.UserSessionData;
 import java.io.IOException;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,23 @@ public class Almacenes extends Master{
     public ModelAndView display(HttpServletRequest request,
             HttpServletResponse response,
             @ModelAttribute("user") UserSessionData user) throws ServletException, IOException {
+
+        HashMap<String,String> tableCaptions = new HashMap<String,String>();
+        
+        tableCaptions.put("id", "Acciones:90");
+        tableCaptions.put("titulo", "Nombre:300");
+        tableCaptions.put("tipo", "Tipo:110");
+        tableCaptions.put("reporteo", "Rep.:30");
+        tableCaptions.put("ventas", "Vta.:30");
+        tableCaptions.put("compras", "Com.:30");
+        tableCaptions.put("traspaso", "Tras.:30");
+        tableCaptions.put("reabastecimiento", "Rea.:30");
+        tableCaptions.put("garantias", "Gar.:30");
+        tableCaptions.put("consignacion", "Con.:30");
+        tableCaptions.put("recepcion_mat", "R.Mat.:30");
+        tableCaptions.put("explosion_mat", "E.Mat.:30");
+        
+        this.setInfoConstruccionTabla(tableCaptions);
         return super.drawClassic(request, response, user);
     }
 }
