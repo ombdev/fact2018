@@ -18,12 +18,6 @@ public class Master {
     private String layoutFooter = "./vm/layouts/footer.vm";
     private String layoutMenu = "./vm/layouts/menu.vm";
 
-    HashMap<String, String> infoConstruccionTabla;
-
-    public void setInfoConstruccionTabla(HashMap<String, String> infoConstruccionTabla) {
-        this.infoConstruccionTabla = infoConstruccionTabla;
-    }
-
     public void setAppName(String appName) {
         this.appName = appName;
     }
@@ -48,9 +42,10 @@ public class Master {
     }
 
     private ModelAndView dynamicContent(ModelAndView mv,
-            HttpServletRequest request, final UserSessionData user) {
+            HttpServletRequest request, final UserSessionData user,
+            final HashMap<String, String> infoConstruccionTabla) {
 
-        mv = mv.addObject("grid", this.generaGrid(this.infoConstruccionTabla));
+        mv = mv.addObject("grid", this.generaGrid(infoConstruccionTabla));
         mv = mv.addObject("url", request.getContextPath());
         mv = mv.addObject("username", user.getUserName());
         mv = mv.addObject("empresa", user.getRazonSocialEmpresa());
@@ -60,12 +55,13 @@ public class Master {
 
     public ModelAndView drawClassic(HttpServletRequest request,
             HttpServletResponse response,
-            UserSessionData user) throws ServletException, IOException {
+            UserSessionData user,
+            final HashMap<String, String> infoConstruccionTabla) throws ServletException, IOException {
 
         ModelAndView mv = new ModelAndView(this.templateFolder + "/display",
                 "title", this.appName);
         mv = this.staticContent(mv);
-        mv = this.dynamicContent(mv, request, user);
+        mv = this.dynamicContent(mv, request, user, infoConstruccionTabla);
         
         /* id de usuario codificado */
         mv = mv.addObject("iu", Base64Coder.encodeString(

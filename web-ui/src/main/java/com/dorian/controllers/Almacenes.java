@@ -37,7 +37,6 @@ public class Almacenes extends Master{
         tableCaptions.put("recepcion_mat", "R.Mat.:30");
         tableCaptions.put("explosion_mat", "E.Mat.:30");
         
-        this.setInfoConstruccionTabla(tableCaptions);
-        return super.drawClassic(request, response, user);
+        return this.drawClassic(request, response, user, tableCaptions);
     }
 }
