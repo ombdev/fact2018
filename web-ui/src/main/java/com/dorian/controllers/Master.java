@@ -9,21 +9,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 public class Master {
 
-    private String templateFolder;
-    private String appName;
     private String layoutHeader = "./vm/layouts/header.vm";
     private String layoutFooter = "./vm/layouts/footer.vm";
     private String layoutMenu = "./vm/layouts/menu.vm";
 
-    public void setAppName(String appName) {
-        this.appName = appName;
-    }
-
-    public void setTemplateFolder(String templateFolder) {
-        this.templateFolder = templateFolder;
+    public String getUserNameFromContext(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) return ((UserDetails)principal).getUsername();
+        else return principal.toString();
     }
 
     private String generaGrid(HashMap<String, String> infoConstruccionTabla) {
@@ -56,10 +54,11 @@ public class Master {
     public ModelAndView drawClassic(HttpServletRequest request,
             HttpServletResponse response,
             UserSessionData user,
-            final HashMap<String, String> infoConstruccionTabla) throws ServletException, IOException {
+            final HashMap<String, String> infoConstruccionTabla,
+            String title, String folder) throws ServletException, IOException {
 
-        ModelAndView mv = new ModelAndView(this.templateFolder + "/display",
-                "title", this.appName);
+        ModelAndView mv = new ModelAndView(folder + "/display",
+                "title", title);
         mv = this.staticContent(mv);
         mv = this.dynamicContent(mv, request, user, infoConstruccionTabla);
         
