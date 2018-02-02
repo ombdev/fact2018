@@ -9,7 +9,7 @@ class HelperXml(object):
         An xml wrapper to xslt proc
         """
         import subprocess
-        from misc.localexec import LocalExec
+        from cfdiengine.misc.localexec import LocalExec
         from distutils.spawn import find_executable
 
         def seekout_xsltproc():
