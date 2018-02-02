@@ -8,6 +8,38 @@ import re
 class HelperStr(object):
 
     @staticmethod
+    def erase_bom(path):
+        import codecs
+
+        BUFSIZE = 4096
+        chunk = None
+
+        def takeout(l, f, c):
+            i = 0
+            c = c[l:]
+            while c:
+                f.seek(i)
+                f.write(c)
+                i += len(c)
+                f.seek(l, os.SEEK_CUR)
+                c = f.read(BUFSIZE)
+            f.seek(-l, os.SEEK_CUR)
+            f.truncate()
+
+        with open(path, "r+b") as p:
+            chunk = p.read(BUFSIZE)
+            if chunk.startswith(codecs.BOM_UTF8):
+                takeout(len(codecs.BOM_UTF8), p, chunk)
+            if chunk.startswith(codecs.BOM_UTF32_BE):
+                takeout(len(codecs.BOM_UTF32_BE), p, chunk)
+            if chunk.startswith(codecs.BOM_UTF32_LE):
+                takeout(len(codecs.BOM_UTF32_LE), p, chunk)
+            if chunk.startswith(codecs.BOM_UTF16_BE):
+                takeout(len(codecs.BOM_UTF16_BE), p, chunk)
+            if chunk.startswith(codecs.BOM_UTF16_LE):
+                takeout(len(codecs.BOM_UTF16_LE), p, chunk)
+
+    @staticmethod
     def format_currency(amount):
         """format as currency an string amount"""
 
@@ -43,3 +75,43 @@ class HelperStr(object):
                 string.ascii_uppercase + string.digits
             ) for _ in range(size)
         )
+
+    @staticmethod
+    def edit_pattern(pattern, replace, source, dest=None):
+        """Reads a source file and writes the destination file.
+
+        In each line, replaces pattern with replace.
+
+        Args:
+            pattern (str): pattern to match (can be re.pattern)
+            replace (str): replacement str
+            source  (str): input filename
+            dest (str):   destination filename, if not given, source will be over written.
+        """
+
+        import shutil
+        from tempfile import mkstemp
+
+        fout = None
+        fin = open(source, 'r', encoding="utf-8")
+
+        if dest is not None:
+            fout = open(dest, 'w', encoding="utf-8")
+        else:
+            fd, name = mkstemp()
+            os.close(fd)
+            fout = open(name, 'w', encoding="utf-8")
+
+        for line in fin:
+            out = re.sub(pattern, replace, line)
+            fout.write(out)
+        try:
+            fout.writelines(fin.readlines())
+        except Exception as E:
+            raise E
+
+        fin.close()
+        fout.close()
+
+        if dest is None:
+            shutil.move(name, source)
