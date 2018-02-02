@@ -3,7 +3,7 @@ python:
   - "3.6"
 before_install:
   - sudo apt-get install -y xsltproc
-  - export PYTHONPATH=.
+  - export PYTHONPATH=.:./cfdiengine
   - pwd
 # command to install dependencies
 install:
