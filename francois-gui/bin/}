@@ -1,0 +1,52 @@
+package routers
+
+import (
+	"github.com/gorilla/mux"
+//        "strings"
+        "net/http"
+//        "io/ioutil"
+)
+/*
+type PublicStuff struct {
+    
+}
+
+func getMimeTypeForWebPageRes( path string ) string {
+
+    ct := "text/plain" 
+
+    if strings.HasSuffix( path , ".css"){
+        ct = "text/css"
+    } else if strings.HasSuffix( path , ".html"){
+        ct = "text/html"    
+    } else if strings.HasSuffix( path , ".js"){
+        ct = "application/javascript"
+    } else if strings.HasSuffix( path , ".png") {
+        ct = "image/png"
+    }
+
+    return ct
+}
+
+func ( this *PublicStuff ) ServeHTTP( w http.ResponseWriter , r *http.Request ){
+   
+    path := r.URL.Path[1:]
+    data , err := ioutil.ReadFile( "/home/j2eeserver/maxima/res/public/" + string( path ) )
+
+    if err == nil {
+        w.Header().Add( "Content Type", getMimeTypeForWebPageRes( path ) )
+        w.Write( data )
+    } else {
+        w.WriteHeader(404)
+        w.Write( []byte("404 My dear friend - " + http.StatusText(404) ) )
+    }    
+}
+*/
+func SetPublicWWW(router *mux.Router) *mux.Router {
+
+    //router.Handle("/public",new(PublicStuff)).Methods("GET")    
+ router.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("/home/j2eeserver/maxima/res/public"))))    
+//router.Handle("/public",http.FileServer(http.Dir("/home/j2eeserver/maxima/res/public")))
+    return router
+}
+
