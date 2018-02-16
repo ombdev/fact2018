@@ -1,0 +1,5 @@
+{
+  "PrivateKeyPath": "/home/j2eeserver/maxima/res/keys/restful/private_key",
+  "PublicKeyPath": "/home/j2eeserver/maxima/res/keys/restful/public_key.pub",
+  "JWTExpirationDelta": 72
+}
